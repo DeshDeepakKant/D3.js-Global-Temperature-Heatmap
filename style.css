@@ -1,0 +1,189 @@
+:root {
+    --bg-primary: #0a0a1a;
+    --bg-secondary: #111127;
+    --text-primary: #00ffff;
+    --text-secondary: #00ccff;
+    --accent-color: #ff00ff;
+    --neon-glow: #00ffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@keyframes noise {
+    0%, 100% { background-position: 0 0; }
+    10% { background-position: -5% -10%; }
+    20% { background-position: -15% 5%; }
+    30% { background-position: 7% -25%; }
+    40% { background-position: -5% 25%; }
+    50% { background-position: -15% 10%; }
+    60% { background-position: 15% 0%; }
+    70% { background-position: 0 50%; }
+    80% { background-position: -15% 25%; }
+    90% { background-position: 10% -15%; }
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%" height="100%" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1000;
+    animation: noise 0.2s infinite;
+}
+
+.gradient-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg, 
+        rgba(10,10,26,0.9) 0%, 
+        rgba(17,17,39,0.9) 100%
+    );
+    z-index: -1;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+#title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 
+        0 0 10px var(--neon-glow),
+        0 0 20px var(--neon-glow),
+        0 0 40px var(--accent-color);
+}
+
+#description {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+svg {
+    background-color: rgba(17, 17, 39, 0.7);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.2),
+        0 0 50px rgba(255, 0, 255, 0.1);
+}
+
+.cell {
+    transition: all 0.3s ease;
+    stroke: rgba(0, 255, 255, 0.2);
+}
+
+.cell:hover {
+    transform: scale(1.05);
+    stroke: var(--neon-glow);
+    stroke-width: 2px;
+}
+
+#tooltip {
+    position: absolute;
+    background: rgba(17, 17, 39, 0.9);
+    color: var(--text-primary);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--neon-glow);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.2),
+        0 0 40px rgba(255, 0, 255, 0.1);
+    font-size: 14px;
+    z-index: 1000;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+#tooltip strong {
+    color: var(--neon-glow);
+    margin-right: 5px;
+}
+
+#x-axis, #y-axis {
+    color: var(--text-secondary);
+}
+
+#x-axis text, #y-axis text {
+    font-size: 12px;
+}
+
+#legend rect {
+    transition: all 0.3s ease;
+}
+
+#legend rect:hover {
+    transform: scale(1.1);
+}
+
+.cyber-footer {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(17, 17, 39, 0.5);
+    color: var(--text-secondary);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.github-link {
+    color: var(--neon-glow);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.github-link:hover {
+    text-shadow: 
+        0 0 10px var(--neon-glow),
+        0 0 20px var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    #title {
+        font-size: 2rem;
+    }
+
+    svg {
+        width: 100%;
+    }
+}
